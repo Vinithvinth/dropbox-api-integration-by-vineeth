@@ -7,10 +7,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-/**
- * This service connects directly to Dropbox API
- * and prints the team info to console when the app starts.
- */
+
 @Service
 public class DropboxService implements CommandLineRunner {
 
@@ -26,13 +23,12 @@ public class DropboxService implements CommandLineRunner {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(TEAM_INFO_URL))
                     .header("Authorization", "Bearer " + ACCESS_TOKEN)
-                    // .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.noBody()) 
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            // Print the response
+         
             System.out.println("Dropbox API Response: ");
             System.out.println(response.body());
 
@@ -44,9 +40,7 @@ public class DropboxService implements CommandLineRunner {
         }
     }
 
-    /**
-     * This will automatically execute when the Spring Boot app starts.
-     */
+    
     @Override
     public void run(String... args) {
         System.out.println("Fetching Dropbox Team Info...");
